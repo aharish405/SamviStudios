@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #4C1D95; /* Deep Purple */
+  --color-primary-light: #6D28D9;
+  --color-primary-dark: #3B0764;
+  --color-secondary: #D97706; /* Gold / Peach accents */
+  --color-secondary-light: #F59E0B;
+  --color-bg-light: #FAFAFA;
+  --color-bg-dark: #121212;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    @apply bg-neutral-50 text-neutral-900 transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-neutral-950 text-neutral-50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 dark:bg-black/50 dark:border-white/10;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg border border-white/30 shadow-xl dark:bg-neutral-900/80 dark:border-white/10;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+}
