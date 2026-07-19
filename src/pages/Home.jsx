@@ -209,7 +209,7 @@ function FitnessTools() {
                 Start Your Journey
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 mb-6 relative z-10 text-lg">
-                Explore our 9 service categories and find the perfect program for your goals.
+                Explore our diverse service categories and find the perfect program for your goals.
               </p>
               <Link to="/services" className="text-secondary hover:text-secondary-light font-bold flex items-center gap-2 relative z-10 transition-colors w-fit">
                 Explore Services <ArrowRight size={18} />
@@ -233,13 +233,18 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Layered bg: photo + gradient atmosphere */}
+        {/* Layered bg: video + gradient atmosphere */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop"
-            alt="Samvi Studios in-studio session"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop"
             className="w-full h-full object-cover"
-          />
+          >
+            <source src="/311688_medium.mp4" type="video/mp4" />
+          </video>
         </div>
         {/* Rich overlay: dark + purple tint at top, warm gold at bottom */}
         <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(170deg, rgba(10,0,30,0.75) 0%, rgba(30,10,60,0.65) 40%, rgba(60,20,10,0.55) 100%)' }} />
