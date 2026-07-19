@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const images = [
   { url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop', category: 'Yoga' },
@@ -15,6 +16,11 @@ const images = [
 export default function Gallery() {
   return (
     <div className="pb-24 min-h-screen">
+      <SEO
+        title="Studio Gallery — Samvi Studios, Kompally"
+        description="Explore Samvi Studios in Kompally through our gallery. See our yoga classes, classical dance performances, music sessions, and wellness spaces."
+        canonical="/gallery"
+      />
       <div className="bg-neutral-900 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.h1 

@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="space-y-4">
             <img src="/SamviStudios.jpg" alt="Samvi Studios" className="h-16 w-auto object-contain rounded-xl mb-4" />
             <p className="text-sm leading-relaxed text-neutral-400">
-              Samvi Studios is a community-driven space in Kompally dedicated to fitness, movement, and your daily well-being.
+              Samvi Studios — Fusion of Arts. A community space in Kompally offering Yoga, Classical Dance, Music, and more across our diverse range of service categories.
             </p>
             <div className="flex gap-4 pt-4">
               <a href="#" className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center hover:bg-primary transition-colors text-white">
@@ -29,10 +29,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'Services', 'Schedule', 'Pricing', 'Gallery'].map((link) => (
+              {['Home', 'Services', 'Schedule', 'Pricing', 'Gallery', 'Contact'].map((link) => (
                 <li key={link}>
                   <Link to={link === 'Home' ? '/' : `/${link.toLowerCase()}`} className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-light"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
                     {link}
                   </Link>
                 </li>
@@ -40,14 +40,29 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services — 9 categories */}
           <div>
             <h4 className="text-lg font-semibold text-white mb-6">Our Services</h4>
             <ul className="space-y-3">
-              {['Yoga & Meditation', 'Fitness Training', 'Zumba Classes', 'Bollywood Dance', 'Kids Programs'].map((service) => (
-                <li key={service} className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  {service}
+              {[
+                { label: 'Offline Sessions', color: '#7C3AED' },
+                { label: 'Online Sessions', color: '#059669' },
+                { label: 'Workshops', color: '#D97706' },
+                { label: 'Certification Courses', color: '#E11D48' },
+                { label: 'Personal Training', color: '#2563EB' },
+                { label: 'Corporate Wellness', color: '#475569' },
+                { label: 'Sangeethu', color: '#0D9488' },
+                { label: 'Events', color: '#EA580C' },
+                { label: 'Retreats', color: '#7C3AED' },
+              ].map((svc) => (
+                <li key={svc.label} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: svc.color }} />
+                  <Link
+                    to={`/services#${svc.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="text-neutral-400 hover:text-white transition-colors text-sm"
+                  >
+                    {svc.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -74,7 +89,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
-          <p>&copy; {new Date().getFullYear()} Samvi Studios. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Samvi Studios — Fusion of Arts. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>

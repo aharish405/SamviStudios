@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
@@ -14,17 +15,25 @@ export default function Contact() {
   });
 
   const onSubmit = (data) => {
-    const text = `Hello Samvi Studios,%0A
-Name: ${data.name}%0A
-Phone: ${data.phone}%0A
-Service/Plan: ${data.service}%0A
-Message: ${data.message}`;
-
+    const lines = [
+      'Hello Samvi Studios!',
+      '',
+      data.service ? `Interested in: ${data.service}` : '',
+      `Name: ${data.name}`,
+      `Phone: ${data.phone}`,
+      `Message: ${data.message}`,
+    ].filter((l, i) => !(i === 2 && !data.service));
+    const text = encodeURIComponent(lines.join('\n'));
     window.open(`https://wa.me/919700605652?text=${text}`, '_blank');
   };
 
   return (
     <div className="pb-24 min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      <SEO
+        title="Contact Us — Enquire About Classes & Programs"
+        description="Get in touch with Samvi Studios, Kompally. Enquire about Yoga, Classical Dance, Music, Certification Courses, Workshops, Corporate Wellness and more. Call +91 97006 05652."
+        canonical="/contact"
+      />
       <div className="bg-neutral-900 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.h1 
@@ -40,7 +49,7 @@ Message: ${data.message}`;
             transition={{ delay: 0.1 }}
             className="text-lg text-neutral-300 max-w-2xl mx-auto"
           >
-            Ready to start your fitness journey? Contact us today.
+            Ready to start your arts journey? Contact us to enquire about any of our programs.
           </motion.p>
         </div>
       </div>
@@ -131,20 +140,68 @@ Message: ${data.message}`;
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Service Interested In</label>
-                <select 
-                  {...register("service", { required: "Please select a service" })}
-                  className={`w-full px-4 py-3 rounded-xl border bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary ${errors.service ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-800'}`}
-                >
-                  <option value="">Select a service</option>
-                  <option value="Yoga">Yoga</option>
-                  <option value="Fitness">Fitness Training</option>
-                  <option value="Dance">Dance / Zumba</option>
-                  <option value="Personal Training">Personal Training</option>
-                  <option value="Monthly Plan">Monthly Plan</option>
-                  <option value="Quarterly Plan">Quarterly Plan</option>
-                  <option value="Other">Other</option>
-                </select>
+                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                  Service Interested In
+                </label>
+
+                {defaultService ? (
+                  /* Pre-filled mode — service came from a "Book Now" / nav sub-item click */
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1.5 bg-primary/10 text-primary dark:text-primary-light border border-primary/20 px-3 py-1 rounded-full text-xs font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light" />
+                        Pre-selected from your choice
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      {...register('service', { required: 'Please enter the service you are interested in' })}
+                      className={`w-full px-4 py-3 rounded-xl border bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary ${errors.service ? 'border-red-500' : 'border-primary/30 dark:border-primary/20'}`}
+                    />
+                    <p className="mt-1 text-xs text-neutral-400">You can edit this if needed.</p>
+                  </div>
+                ) : (
+                  /* Manual mode — full dropdown */
+                  <select
+                    {...register('service', { required: 'Please select a service' })}
+                    className={`w-full px-4 py-3 rounded-xl border bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary ${errors.service ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-800'}`}
+                  >
+                    <option value="">Select a service</option>
+                    <optgroup label="Offline Sessions">
+                      <option value="Offline Sessions — Yoga">Offline Sessions — Yoga</option>
+                      <option value="Offline Sessions — Dance (Classical)">Offline Sessions — Dance (Classical)</option>
+                      <option value="Offline Sessions — Zumba">Offline Sessions — Zumba</option>
+                      <option value="Offline Sessions — Music">Offline Sessions — Music</option>
+                      <option value="Offline Sessions — Gymnastics">Offline Sessions — Gymnastics</option>
+                    </optgroup>
+                    <optgroup label="Online Sessions">
+                      <option value="Online Sessions — Yoga">Online Sessions — Yoga</option>
+                      <option value="Online Sessions — Dance (Classical)">Online Sessions — Dance (Classical)</option>
+                    </optgroup>
+                    <optgroup label="Workshops">
+                      <option value="Workshops — Yoga">Workshops — Yoga</option>
+                      <option value="Workshops — Dance (Classical)">Workshops — Dance (Classical)</option>
+                    </optgroup>
+                    <optgroup label="Certification Courses">
+                      <option value="Certification Courses — Yoga">Certification Courses — Yoga</option>
+                      <option value="Certification Courses — Music">Certification Courses — Music</option>
+                      <option value="Certification Courses — Dance (Classical)">Certification Courses — Dance (Classical)</option>
+                    </optgroup>
+                    <optgroup label="Personal Training">
+                      <option value="Personal Training — Yoga">Personal Training — Yoga</option>
+                      <option value="Personal Training — Dance (Classical)">Personal Training — Dance (Classical)</option>
+                    </optgroup>
+                    <option value="Corporate Wellness Programs">Corporate Wellness Programs</option>
+                    <option value="Sangeethu">Sangeethu</option>
+                    <option value="Events — Dance (Classical)">Events — Dance (Classical)</option>
+                    <optgroup label="Retreats">
+                      <option value="Retreats — Yoga">Retreats — Yoga</option>
+                      <option value="Retreats — Dance (Classical)">Retreats — Dance (Classical)</option>
+                    </optgroup>
+                    <option value="Other / General Enquiry">Other / General Enquiry</option>
+                  </select>
+                )}
+
                 {errors.service && <p className="mt-1 text-sm text-red-500">{errors.service.message}</p>}
               </div>
 
